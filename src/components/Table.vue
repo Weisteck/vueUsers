@@ -40,7 +40,14 @@
             v-for="user in sortedUsers"
             :key="user.email"
           >
-            <td><img :src="user.avatar"></td>
+            <td>
+              <router-link :to="{name:'Detail', params:{'id': user.id}}">
+                <img
+                  :src="user.avatar"
+                  class="img-fluid"
+                >
+              </router-link>
+            </td>
             <td v-if="!user.nameFormated">
               {{ user.name }}
             </td>

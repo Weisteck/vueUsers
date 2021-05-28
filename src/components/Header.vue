@@ -92,16 +92,18 @@ export default {
   methods: {
     fetchUsers() {
       this.loading = true;
-      axios('https://randomuser.me/api/?results=20').then(
-        ({ data: { results } }) => {
+      axios('https://ynov-front.herokuapp.com/api/users').then(
+        ({ data: { data } }) => {
           this.loading = false;
-          this.nonFilteredUsers = results.map((user) => ({
-            age: user.dob.age,
-            name: `${user.name.first} ${user.name.last.toUpperCase()}`,
+          this.nonFilteredUsers = data.map((user) => ({
+            // eslint-disable-next-line no-underscore-dangle
+            id: user._id,
+            age: new Date(Date.now() - new Date(user.birthDate).getTime()).getFullYear() - 1970,
+            name: `${user.firstName} ${user.lastName.toUpperCase()}`,
             email: user.email,
             phone: user.phone,
             gender: user.gender,
-            avatar: user.picture.thumbnail,
+            avatar: user.avatarUrl,
           }));
 
           this.filteredUser = this.nonFilteredUsers;
