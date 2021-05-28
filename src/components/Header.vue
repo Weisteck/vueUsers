@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="loading">
+    <p>Loading...</p>
+  </div>
+  <div v-else>
     <div class="card mb-2 mt-2">
       <div class="card-header p-3">
         <h1>VueJS example</h1>
@@ -65,6 +68,7 @@ export default {
       nonFilteredUsers: [],
       filteredUser: [],
       search: '',
+      loading: false,
     };
   },
   computed: {
@@ -82,10 +86,15 @@ export default {
       this.filteredList();
     },
   },
+  created() {
+    this.fetchUsers();
+  },
   methods: {
     fetchUsers() {
+      this.loading = true;
       axios('https://randomuser.me/api/?results=20').then(
         ({ data: { results } }) => {
+          this.loading = false;
           this.nonFilteredUsers = results.map((user) => ({
             age: user.dob.age,
             name: `${user.name.first} ${user.name.last.toUpperCase()}`,
