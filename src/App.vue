@@ -3,15 +3,35 @@
     <div id="nav">
       <router-link to="/">
         Home
-      </router-link> |
+      </router-link>
+      |
       <router-link to="/about">
         About
       </router-link>
     </div>
-    <router-view />
+    <div v-if="notification" :class="`bg-${notification.type}`"
+         class="shadow text-uppercase alert w-25 mx-auto text-white text-center"
+    >
+      {{ notification.message }}
+    </div>
+    <router-view @notification="showNotification"/>
   </div>
 </template>
-
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      notification: null,
+    };
+  },
+  methods: {
+    showNotification(notification) {
+      this.notification = notification;
+    },
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
