@@ -18,6 +18,8 @@
           <dd>{{ user.lastName }}</dd>
           <dt>Prenom :</dt>
           <dd>{{ user.firstName }}</dd>
+          <dt>Email :</dt>
+          <dd>{{ user.email }}</dd>
           <dt>Anniversaire :</dt>
           <dd>{{ user.birthDate }}</dd>
           <dt>Age :</dt>
@@ -85,10 +87,18 @@ export default {
       try {
         // eslint-disable-next-line no-underscore-dangle
         await axios.put(`https://ynov-front.herokuapp.com/api/users/${this.$route.params.id}`, userUpdated);
-        this.$emit('notification', { type: 'success', message: "L'utilisateur a bien ete modifie" });
+        this.$notify({
+          group: 'app',
+          title: 'Success',
+          text: 'User Modified',
+        });
         await this.$router.push({ name: 'About' });
       } catch (e) {
-        this.$emit('notification', { type: 'danger', message: e.message });
+        this.$notify({
+          group: 'app',
+          title: 'Important',
+          text: `User not created missing information ${e.message}`,
+        });
       }
     },
   },

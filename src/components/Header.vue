@@ -21,7 +21,7 @@
       >
         <template v-slot:body>
           <Formulaire
-            initial-values="user"
+            :initial-values="user"
             @submit="createUser"
           />
         </template>
@@ -137,17 +137,22 @@ export default {
         },
       );
     },
-    async createUSer(userCreated) {
+    async createUser(userCreated) {
       try {
         await axios.post('https://ynov-front.herokuapp.com/api/users', userCreated);
-        this.$emit('notification', {
-          type: 'success',
-          message: 'Le user a bien ete creee !',
+        this.modal = false;
+        this.$notify({
+          group: 'app',
+          title: 'Success',
+          text: 'User Created',
         });
-        this.$emit('close');
         this.fetchUsers(userCreated);
       } catch (e) {
-        this.$emit('notification', { type: 'danger', message: e.message });
+        this.$notify({
+          group: 'app',
+          title: 'Important',
+          text: `User not created missing information ${e.message}`,
+        });
       }
     },
 

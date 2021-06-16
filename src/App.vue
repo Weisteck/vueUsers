@@ -9,14 +9,8 @@
         About
       </router-link>
     </div>
-    <div
-      v-if="notification"
-      :class="`bg-${notification.type}`"
-      class="shadow text-uppercase alert w-25 mx-auto text-white text-center"
-    >
-      {{ notification.message }}
-    </div>
-    <router-view @notification="showNotification" />
+    <router-view />
+    <notifications group="app" />
   </div>
 </template>
 <script>

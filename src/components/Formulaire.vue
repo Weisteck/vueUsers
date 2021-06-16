@@ -19,10 +19,17 @@
         >
       </div>
       <div>
-        <label for="fistName">Prenom :</label>
+        <label for="firstName">Prenom :</label>
         <input
-          id="firsName"
+          id="firstName"
           v-model="user.firstName"
+        >
+      </div>
+      <div>
+        <label for="email">Email :</label>
+        <input
+          id="email"
+          v-model="user.email"
         >
       </div>
       <div>
