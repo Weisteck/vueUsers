@@ -54,8 +54,8 @@ export default {
     };
   },
   mounted() {
-    document.addEventListener('keydown', (e) => {
-      if (e.keyCode === 27) {
+    document.addEventListener('keydown', (KeyboardEvent) => {
+      if (KeyboardEvent.code === 'Escape') {
         this.close();
       }
     });
