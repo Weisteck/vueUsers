@@ -5,25 +5,63 @@
   >
     <div class="col-md-6">
       <img
-        :src="user.avatarUrl"
+        :src="user.avatarUrl || baseImage"
+        alt="profile"
         class="img-fluid"
       >
     </div>
     <div class="col-md-6 text-left">
-      <dl>
-        <label>Nom :</label>
-        <input v-model="user.lastName">
-        <label>Prenom :</label>
-        <input v-model="user.firstName">
-        <label>Anniversaire :</label>
-        <input v-model="user.birthDate">
-        <label>Telephone :</label>
-        <input v-model="user.phone">
-        <label>Genre :</label>
-        <input v-model="user.gender">
-        <label>Detail :</label>
-        <textarea v-model="user.details" />
-      </dl>
+      <div>
+        <label for="lastName">Nom :</label>
+        <input
+          id="lastName"
+          v-model="user.lastName"
+        >
+      </div>
+      <div>
+        <label for="fistName">Prenom :</label>
+        <input
+          id="firsName"
+          v-model="user.firstName"
+        >
+      </div>
+      <div>
+        <label for="birthDate">Anniversaire :</label>
+        <input
+          id="birthDate"
+          v-model="user.birthDate"
+          type="date"
+        >
+      </div>
+      <div>
+        <label for="mobilePhone">Telephone :</label>
+        <input
+          id="mobilePhone"
+          v-model="user.phone"
+          type="tel"
+        >
+      </div>
+      <div>
+        <label for="gender">Genre :</label>
+        <input
+          id="gender"
+          v-model="user.gender"
+        >
+      </div>
+      <div>
+        <label for="detail">Detail :</label>
+        <textarea
+          id="detail"
+          v-model="user.details"
+        />
+      </div>
+      <div>
+        <label for="urlImage">Image URL :</label>
+        <input
+          id="urlImage"
+          v-model="user.avatarUrl"
+        >
+      </div>
     </div>
     <div class="col-md-12">
       <button type="submit">
@@ -41,6 +79,7 @@ export default {
   data() {
     return {
       user: this.initialValues,
+      baseImage: 'https://sumaleeboxinggym.com/wp-content/uploads/2018/06/Generic-Profile-1600x1600.png',
     };
   },
   methods: {

@@ -5,8 +5,26 @@
   <div v-else>
     <div class="card mb-2 mt-2">
       <div class="card-header p-3">
-        <h1>VueJS example</h1>
+        <h1>VueJS</h1>
+        <div>
+          <button
+            class="btn btn-primary"
+            @click="modal = true"
+          >
+            Create New Users
+          </button>
+        </div>
       </div>
+      <Modal
+        v-if="modal"
+        @close="modal = false"
+      >
+        <template v-slot:body>
+          <Formulaire
+            initial-values="user"
+          />
+        </template>
+      </Modal>
       <div class="card-body">
         <div class="row">
           <div class="col-md-2">
@@ -59,8 +77,12 @@
 
 <script>
 import axios from 'axios';
+import Modal from './Modal.vue';
+import Formulaire from './Formulaire.vue';
 
 export default {
+  name: 'Header',
+  components: { Formulaire, Modal },
   data() {
     return {
       gender: '',
@@ -69,6 +91,8 @@ export default {
       filteredUser: [],
       search: '',
       loading: false,
+      modal: false,
+      user: {},
     };
   },
   computed: {
@@ -145,6 +169,7 @@ export default {
 
       this.$emit('fetch-user', this.filteredUser);
     },
+
   },
 };
 </script>

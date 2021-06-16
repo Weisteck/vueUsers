@@ -9,12 +9,14 @@
         About
       </router-link>
     </div>
-    <div v-if="notification" :class="`bg-${notification.type}`"
-         class="shadow text-uppercase alert w-25 mx-auto text-white text-center"
+    <div
+      v-if="notification"
+      :class="`bg-${notification.type}`"
+      class="shadow text-uppercase alert w-25 mx-auto text-white text-center"
     >
       {{ notification.message }}
     </div>
-    <router-view @notification="showNotification"/>
+    <router-view @notification="showNotification" />
   </div>
 </template>
 <script>
@@ -28,6 +30,7 @@ export default {
   methods: {
     showNotification(notification) {
       this.notification = notification;
+      setTimeout(() => { this.notification = null; }, 3000);
     },
   },
 };

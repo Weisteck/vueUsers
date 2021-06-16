@@ -83,7 +83,6 @@ export default {
     },
     async updateUser(userUpdated) {
       try {
-        console.log('cool');
         // eslint-disable-next-line no-underscore-dangle
         await axios.put(`https://ynov-front.herokuapp.com/api/users/${this.$route.params.id}`, userUpdated);
         this.$emit('notification', { type: 'success', message: "L'utilisateur a bien ete modifie" });
