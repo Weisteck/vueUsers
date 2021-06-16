@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>TEST pour DAVID</h1>
+    <h1>TEST</h1>
     <div>{{ data }}</div>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
     };
   },
   created() {
-    axios.get('http://localhost:5000/api/test')
+    axios.get('/api/test')
       .then((res) => {
         this.data = res.data.message;
       });
