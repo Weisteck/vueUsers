@@ -22,6 +22,7 @@
         <template v-slot:body>
           <Formulaire
             initial-values="user"
+            @submit="createUser"
           />
         </template>
       </Modal>
@@ -135,6 +136,19 @@ export default {
           this.$emit('fetch-user', this.nonFilteredUsers);
         },
       );
+    },
+    async createUSer(userCreated) {
+      try {
+        await axios.post('https://ynov-front.herokuapp.com/api/users', userCreated);
+        this.$emit('notification', {
+          type: 'success',
+          message: 'Le user a bien ete creee !',
+        });
+        this.$emit('close');
+        this.fetchUsers(userCreated);
+      } catch (e) {
+        this.$emit('notification', { type: 'danger', message: e.message });
+      }
     },
 
     filteredList() {
